@@ -1,10 +1,9 @@
 (()=>{
 'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], number=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
-let less=matchMedia('(prefers-reduced-motion: reduce)').matches;
-try{less=less||localStorage.getItem('matrix-agri-less-motion')==='yes'}catch{}
-function motion(){document.documentElement.classList.toggle('less-motion',less);$('#motion').textContent=less?'تشغيل الحركة':'تقليل الحركة';$('#motion').setAttribute('aria-pressed',String(less))}motion();
-$('#motion').addEventListener('click',()=>{less=!less;motion();try{localStorage.setItem('matrix-agri-less-motion',less?'yes':'no')}catch{}});
+const motionQuery=matchMedia('(prefers-reduced-motion: reduce)');
+let less=motionQuery.matches;
+document.documentElement.classList.toggle('less-motion',less);
 if('IntersectionObserver' in window){document.documentElement.classList.add('motion-enabled');const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}),{threshold:.06});$$('.reveal').forEach(e=>o.observe(e))}
 const menu=$('#menu-toggle');menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));$('#main-nav').classList.toggle('is-open',open)});$$('#main-nav a').forEach(a=>a.addEventListener('click',()=>{menu.setAttribute('aria-expanded','false');$('#main-nav').classList.remove('is-open')}));addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');$('#main-nav').classList.remove('is-open')}});
 function animate(e){e.classList.remove('panel-changing');void e.offsetWidth;e.classList.add('panel-changing')}
@@ -29,11 +28,29 @@ const months=[
 {label:'يناير / الاستعداد للحضور',title:'قربنا نفتح.\nخلّي زيارتك أوضح.',description:'نركّز على المعلومات العملية، ونوضّح للجمهور يشوف إيه ويستعد إزاي، مع آخر المستجدات المعتمدة.',items:[['معلومات الزيارة في مكان واضح','الموعد والمكان وطريقة الوصول وخطوات التسجيل أو التواصل، حسب المعلومات المعتمدة.'],['مشاركون وتفاصيل مؤكدة','نقدّم الأسماء والقطاعات وتفاصيل البرنامج المعتمدة، ونردّ على الأسئلة المتكررة.'],['قبل الافتتاح بأيام','نظهر تجهيزات الأجنحة وقت حدوثها على أرض المعرض، ونربطها بالتجربة المنتظرة.']],outcome:'عرفت اللي يهمّني، وعارف أستعد وأوصل وأتابع الخطوة التالية.'}];
 $$('[data-month]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.month,d=months[i];active('[data-month]',i);$('#month-panel').setAttribute('aria-labelledby','month-tab-'+i);['label','title','description','outcome'].forEach(k=>$('#month-'+k).textContent=d[k]);$('#month-title').style.whiteSpace='pre-line';$('#month-number').textContent=number(String(i+1).padStart(2,'0'));$('#month-items').replaceChildren(...d.items.map(([h,p],j)=>{const a=document.createElement('article'),n=document.createElement('span'),wrap=document.createElement('div'),title=document.createElement('h4'),copy=document.createElement('p');n.textContent=number(String(j+1).padStart(2,'0'));title.textContent=h;copy.textContent=p;wrap.append(title,copy);a.append(n,wrap);return a}));animate($('#month-panel'))}));keys('[data-month]');
 $('#next-step').addEventListener('click',()=>{const open=$('#next-step').getAttribute('aria-expanded')!=='true';$('#next-step').setAttribute('aria-expanded',String(open));$('#next-panel').hidden=!open;if(open){animate($('#next-panel'));$('#next-panel').scrollIntoView({block:'nearest',behavior:less?'auto':'smooth'})}});
-const chapters=$$('.chapter');let current=0,presenting=false,queued=false;
-function sync(){const range=document.documentElement.scrollHeight-innerHeight;$('.progress i').style.transform=`scaleX(${range>0?Math.min(1,Math.max(0,scrollY/range)):0})`;current=0;chapters.forEach((c,i)=>{if(c.getBoundingClientRect().top<innerHeight*.4)current=i});$$('.chapter-nav a').forEach((a,i)=>a.classList.toggle('active',i===current));$$('.header nav a').forEach(a=>a.classList.toggle('current',a.hash==='#'+chapters[current].id));$('#chapter-count').textContent=number(current+1)+' / '+number(chapters.length);$('#previous').disabled=current===0;$('#next').disabled=current===chapters.length-1;queued=false}
-addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(sync)}},{passive:true});addEventListener('resize',sync);sync();
-function go(i){chapters[Math.max(0,Math.min(chapters.length-1,i))].scrollIntoView({block:'start',behavior:less?'auto':'smooth'})}
-function present(on){presenting=on;$('#present').setAttribute('aria-pressed',String(on));$('#present').innerHTML=on?'إنهاء العرض <span aria-hidden="true">×</span>':'وضع العرض <span aria-hidden="true">↗</span>';$('.presentation-controls').hidden=!on;document.body.classList.toggle('presenting',on)}
-$('#present').addEventListener('click',()=>present(!presenting));$('#exit').addEventListener('click',()=>present(false));$('#previous').addEventListener('click',()=>go(current-1));$('#next').addEventListener('click',()=>go(current+1));
-addEventListener('keydown',e=>{if(!presenting||$('dialog[open]'))return;if(e.key==='Escape'){present(false);return}if(['BUTTON','A','SUMMARY','INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(['ArrowLeft','PageDown'].includes(e.key)){e.preventDefault();go(current+1)}else if(['ArrowRight','PageUp'].includes(e.key)){e.preventDefault();go(current-1)}});
+const chapters=$$('.chapter');let queued=false;
+const scenes=chapters.map(section=>({section,layers:[...section.querySelectorAll('[data-depth]')]}));
+const stage=$('.brand-stage');let pointerX=0,pointerY=0;
+function sync(){
+ const height=innerHeight,range=document.documentElement.scrollHeight-height;
+ $('.progress i').style.transform=`scaleX(${range>0?Math.min(1,Math.max(0,scrollY/range)):0})`;
+ let current=0;
+ scenes.forEach(({section,layers},i)=>{
+  const r=section.getBoundingClientRect();if(r.top<height*.4)current=i;
+  if(less||r.bottom<0||r.top>height)return;
+  const offset=Math.max(-height,Math.min(height,height*.5-(r.top+r.height*.5)));
+  const strength=innerWidth<801?.45:1;
+  layers.forEach(layer=>layer.style.setProperty('--depth-y',`${(offset*Number(layer.dataset.depth)*strength).toFixed(2)}px`));
+ });
+ $$('.chapter-nav a').forEach((a,i)=>a.classList.toggle('active',i===current));
+ $$('.header nav a').forEach(a=>a.classList.toggle('current',a.hash==='#'+chapters[current].id));
+ if(stage){stage.style.setProperty('--pointer-x',`${pointerX.toFixed(2)}px`);stage.style.setProperty('--pointer-y',`${pointerY.toFixed(2)}px`)}
+ queued=false;
+}
+function schedule(){if(!queued){queued=true;requestAnimationFrame(sync)}}
+function preference(){less=motionQuery.matches;document.documentElement.classList.toggle('less-motion',less);if(less){scenes.forEach(({layers})=>layers.forEach(layer=>layer.style.setProperty('--depth-y','0px')));pointerX=pointerY=0}schedule()}
+motionQuery.addEventListener('change',preference);
+addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);
+if(stage){stage.addEventListener('pointermove',e=>{if(less||e.pointerType!=='mouse')return;const r=stage.getBoundingClientRect();pointerX=((e.clientX-r.left)/r.width-.5)*20;pointerY=((e.clientY-r.top)/r.height-.5)*16;schedule()},{passive:true});stage.addEventListener('pointerleave',()=>{pointerX=pointerY=0;schedule()})}
+sync();
 })();
