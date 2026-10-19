@@ -18,7 +18,7 @@ let audit=0;
 function showAudit(i){audit=i;active('.audit-tab',i);const d=audits[i];$('#audit-panel').setAttribute('aria-labelledby','audit-tab-'+i);$('#evidence-image').src=d.image;$('#evidence-image').alt=d.alt;$('#evidence-label').textContent=d.label;$('#evidence-fact').textContent=d.fact;$('#evidence-fix').textContent=d.fix;$('#evidence-source').href=d.source;animate($('#audit-panel'))}
 $$('.audit-tab').forEach(b=>b.addEventListener('click',()=>showAudit(+b.dataset.audit)));keys('.audit-tab',true);
 function lightbox(){const d=audits[audit];$('#lightbox-image').src=d.image;$('#lightbox-image').alt=d.alt;$('#lightbox-caption').textContent=d.label;$('#lightbox').showModal()}
-$('#expand-evidence').addEventListener('click',lightbox);$('#evidence-open').addEventListener('click',lightbox);$('#sources').addEventListener('click',()=>$('#sources-dialog').showModal());
+$('#expand-evidence').addEventListener('click',lightbox);$('#evidence-open').addEventListener('click',lightbox);
 $$('[data-close]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.close).close()));$$('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target!==d)return;const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}));
 const audience=[['ليه أعرض عندكم؟','نوريه شكل المشاركة، ونوع المنتجات والقطاعات الموجودة، وتجارب سابقة تساعده يتخيّل مكان شركته في المعرض.','مثال: شركة بتشرح منتجها من جناحها في دورة سابقة.'],['رعايتي هتظهر بقيمة إزاي؟','نوضّح دور الراعي داخل تجربة المعرض، ونقدّم مشاركته في محتوى مفيد للجمهور، بجانب التعريف باسمه.','مثال: نعرّف الجمهور بالخدمة أو الخبرة اللي بيضيفها الراعي.'],['ليه أحضر؟ وإيه اللي يهمني؟','نقرّب له القطاعات والمنتجات اللي تهمّه، ونساعده يرتّب زيارته بمعلومات واضحة وسهلة.','مثال: دليل مختصر يساعد الزائر يعرف يدور على إيه أثناء الزيارة.']];
 $$('[data-audience]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.audience,d=audience[i];active('[data-audience]',i);$('#audience-panel').setAttribute('aria-labelledby','audience-tab-'+i);['question','answer','example'].forEach((k,j)=>$('#audience-'+k).textContent=d[j]);animate($('#audience-panel'))}));keys('[data-audience]');
@@ -28,29 +28,66 @@ const months=[
 {label:'يناير / الاستعداد للحضور',title:'قربنا نفتح.\nخلّي زيارتك أوضح.',description:'نركّز على المعلومات العملية، ونوضّح للجمهور يشوف إيه ويستعد إزاي، مع آخر المستجدات المعتمدة.',items:[['معلومات الزيارة في مكان واضح','الموعد والمكان وطريقة الوصول وخطوات التسجيل أو التواصل، حسب المعلومات المعتمدة.'],['مشاركون وتفاصيل مؤكدة','نقدّم الأسماء والقطاعات وتفاصيل البرنامج المعتمدة، ونردّ على الأسئلة المتكررة.'],['قبل الافتتاح بأيام','نظهر تجهيزات الأجنحة وقت حدوثها على أرض المعرض، ونربطها بالتجربة المنتظرة.']],outcome:'عرفت اللي يهمّني، وعارف أستعد وأوصل وأتابع الخطوة التالية.'}];
 $$('[data-month]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.month,d=months[i];active('[data-month]',i);$('#month-panel').setAttribute('aria-labelledby','month-tab-'+i);['label','title','description','outcome'].forEach(k=>$('#month-'+k).textContent=d[k]);$('#month-title').style.whiteSpace='pre-line';$('#month-number').textContent=number(String(i+1).padStart(2,'0'));$('#month-items').replaceChildren(...d.items.map(([h,p],j)=>{const a=document.createElement('article'),n=document.createElement('span'),wrap=document.createElement('div'),title=document.createElement('h4'),copy=document.createElement('p');n.textContent=number(String(j+1).padStart(2,'0'));title.textContent=h;copy.textContent=p;wrap.append(title,copy);a.append(n,wrap);return a}));animate($('#month-panel'))}));keys('[data-month]');
 $('#next-step').addEventListener('click',()=>{const open=$('#next-step').getAttribute('aria-expanded')!=='true';$('#next-step').setAttribute('aria-expanded',String(open));$('#next-panel').hidden=!open;if(open){animate($('#next-panel'));$('#next-panel').scrollIntoView({block:'nearest',behavior:less?'auto':'smooth'})}});
-const chapters=$$('.chapter');let queued=false;
-const scenes=chapters.map(section=>({section,layers:[...section.querySelectorAll('[data-depth]')]}));
+const chapters=$$('.chapter');let queued=false,needsMeasure=true;
+const scenes=chapters.map(section=>({section,anchor:document.getElementById(section.dataset.chapter),layers:[...section.querySelectorAll('[data-depth]')]}));
 const stage=$('.brand-stage');let pointerX=0,pointerY=0;
+let barHeight=0;
+function measure(){
+ barHeight=$('.header').getBoundingClientRect().height;
+ document.documentElement.style.setProperty('--bar-height',`${barHeight}px`);
+ scenes.forEach(({section},i)=>{
+  section.style.zIndex=String(i+1);
+  // A tall page scrolls to its bottom before it pins; short pages fill the viewport.
+  section.style.setProperty('--stack-top',`${Math.min(barHeight,innerHeight-section.offsetHeight)}px`);
+ });
+ document.documentElement.classList.toggle('stack-enabled',!less);
+ needsMeasure=false;
+}
 function sync(){
+ if(needsMeasure)measure();
  const height=innerHeight,range=document.documentElement.scrollHeight-height;
  $('.progress i').style.transform=`scaleX(${range>0?Math.min(1,Math.max(0,scrollY/range)):0})`;
+ const rects=scenes.map(({section})=>section.getBoundingClientRect());
  let current=0;
- scenes.forEach(({section,layers},i)=>{
-  const r=section.getBoundingClientRect();if(r.top<height*.4)current=i;
-  if(less||r.bottom<0||r.top>height)return;
+ scenes.forEach(({section,anchor,layers},i)=>{
+  const r=rects[i];
+  if(anchor.getBoundingClientRect().top<height*.4)current=i;
+  const covered=!less&&i<scenes.length-1&&rects[i+1].top<=barHeight+1;
+  section.inert=covered;
+  section.classList.toggle('is-covered',covered);
+  if(less||covered||r.bottom<0||r.top>height)return;
   const offset=Math.max(-height,Math.min(height,height*.5-(r.top+r.height*.5)));
-  const strength=innerWidth<801?.45:1;
+  const strength=(innerWidth<801?.45:1)*.3;
   layers.forEach(layer=>layer.style.setProperty('--depth-y',`${(offset*Number(layer.dataset.depth)*strength).toFixed(2)}px`));
  });
  $$('.chapter-nav a').forEach((a,i)=>a.classList.toggle('active',i===current));
- $$('.header nav a').forEach(a=>a.classList.toggle('current',a.hash==='#'+chapters[current].id));
+ $$('.header nav a').forEach(a=>a.classList.toggle('current',a.hash==='#'+chapters[current].dataset.chapter));
  if(stage){stage.style.setProperty('--pointer-x',`${pointerX.toFixed(2)}px`);stage.style.setProperty('--pointer-y',`${pointerY.toFixed(2)}px`)}
  queued=false;
 }
 function schedule(){if(!queued){queued=true;requestAnimationFrame(sync)}}
-function preference(){less=motionQuery.matches;document.documentElement.classList.toggle('less-motion',less);if(less){scenes.forEach(({layers})=>layers.forEach(layer=>layer.style.setProperty('--depth-y','0px')));pointerX=pointerY=0}schedule()}
+function resized(){needsMeasure=true;schedule()}
+function preference(){
+ less=motionQuery.matches;document.documentElement.classList.toggle('less-motion',less);
+ if(less){scenes.forEach(({section,layers})=>{section.inert=false;section.classList.remove('is-covered');layers.forEach(layer=>layer.style.setProperty('--depth-y','0px'))});pointerX=pointerY=0}
+ resized();
+}
 motionQuery.addEventListener('change',preference);
-addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);
-if(stage){stage.addEventListener('pointermove',e=>{if(less||e.pointerType!=='mouse')return;const r=stage.getBoundingClientRect();pointerX=((e.clientX-r.left)/r.width-.5)*20;pointerY=((e.clientY-r.top)/r.height-.5)*16;schedule()},{passive:true});stage.addEventListener('pointerleave',()=>{pointerX=pointerY=0;schedule()})}
+addEventListener('scroll',schedule,{passive:true});addEventListener('resize',resized);
+if('ResizeObserver' in window){const resizeObserver=new ResizeObserver(resized);chapters.forEach(c=>resizeObserver.observe(c));resizeObserver.observe($('.header'))}
+if(document.fonts)document.fonts.ready.then(resized);
+addEventListener('load',resized,{once:true});
+// Anchor jumps use the flow marker rather than a section's pinned visual position.
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+ const anchor=document.getElementById(a.hash.slice(1));if(!anchor?.classList.contains('chapter-anchor'))return;
+ e.preventDefault();
+ const target=anchor.getBoundingClientRect().top+scrollY-barHeight;
+ const targetIndex=scenes.findIndex(scene=>scene.anchor===anchor);
+ // A formerly covered section must be focusable as soon as navigation begins.
+ if(targetIndex>=0){chapters[targetIndex].inert=false;chapters[targetIndex].classList.remove('is-covered')}
+ window.scrollTo({top:Math.max(0,target),behavior:less?'instant':'smooth'});
+ history.pushState(null,'',a.hash);
+}));
+if(stage){stage.addEventListener('pointermove',e=>{if(less||e.pointerType!=='mouse')return;const r=stage.getBoundingClientRect();pointerX=((e.clientX-r.left)/r.width-.5)*12;pointerY=((e.clientY-r.top)/r.height-.5)*10;schedule()},{passive:true});stage.addEventListener('pointerleave',()=>{pointerX=pointerY=0;schedule()})}
 sync();
 })();
