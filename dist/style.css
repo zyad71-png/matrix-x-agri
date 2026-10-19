@@ -63,3 +63,8 @@ html:not(.stack-enabled) .chapter,.less-motion .chapter{position:relative;top:au
 @media(max-width:420px){.brand-stage{height:460px}.agri-float{top:24px}.matrix-float{top:190px}.stage-caption{bottom:22px}.header .header-brand .matrix-logo{width:125px;height:39px}}
 @media(prefers-reduced-motion:reduce){.chapter{position:relative!important;top:auto!important;min-height:0;box-shadow:none;border-radius:0}.chapter.is-covered{pointer-events:auto}}
 @media print{.chapter{position:relative!important;top:auto!important;min-height:0;border:0;border-radius:0;box-shadow:none}.chapter-anchor,.brand-stage:before{display:none}.brand-stage{height:410px}.agri-float{top:0}.matrix-float{top:160px}}
+
+/* Supplied stacked Matrix logo is used only in the light navigation bar. */
+.header .header-brand{gap:20px;background:transparent;padding:0}.matrix-bar-logo{width:78px;height:68px;object-fit:contain;background:transparent;padding:0;border-radius:0}.agri-bar-logo{width:98px;height:68px;object-fit:contain;background:transparent;padding:0}.brand-divider{width:1px;height:34px;background:var(--line);flex-shrink:0}
+@media(max-width:800px){.header .header-brand{gap:13px}.matrix-bar-logo{width:61px;height:54px}.agri-bar-logo{width:79px;height:54px}.brand-divider{height:28px}}
+@media(max-width:420px){.header .header-brand{gap:10px}.matrix-bar-logo{width:58px;height:51px}.agri-bar-logo{width:73px;height:51px}}
