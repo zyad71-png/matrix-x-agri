@@ -1,0 +1,1 @@
+(()=>{'use strict';const legacy=new Set(['intro','review','idea','plan','content','together','main']);function redirect(){if(legacy.has(location.hash.slice(1))){document.documentElement.classList.add('redirecting');location.replace(new URL('agri/'+location.hash,location.href).href)}}redirect();addEventListener('hashchange',redirect)})();
