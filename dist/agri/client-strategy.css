@@ -49,3 +49,8 @@
 }
 @media(max-width:420px){.client-table td{padding:11px 13px;font-size:14px}.client-table td:first-child{font-size:15px}.client-detail-body p,.client-detail-body li{font-size:15px}.content-steps .content-card{gap:14px}.content-steps .content-copy h3{font-size:19px}.content-steps .content-copy p{font-size:13px}}
 @media print{.client-table thead{position:static;width:auto;height:auto;clip-path:none;overflow:visible;white-space:normal}.client-table table{display:table}.client-table tbody{display:table-row-group}.client-table tr{display:table-row;border:0}.client-table td{display:table-cell;border:1px solid #8ba48d55}.client-table td::before{display:none}.content-steps:before{display:none}}
+/* Leave a reading area after each chapter before the following chapter covers it. */
+@media screen and (max-width:1050px){
+ .chapter:not(:last-of-type){padding-bottom:clamp(190px,35svh,340px)}
+ .hero:not(:last-of-type){padding-bottom:clamp(190px,35svh,340px)}
+}
