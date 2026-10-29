@@ -4,7 +4,7 @@ const body=document.body,prompt=document.querySelector('.portal-prompt'),overlay
 const reduce=matchMedia('(prefers-reduced-motion: reduce)');
 const dialog=document.querySelector('.world-dialog');let selected='',base='',trigger,launching=false;
 function openWorld(card,agri){
- trigger=card;base=card.href;selected='';launching=false;dialog.dataset.world=agri?'agri':'hvacr';
+ trigger=card;base=card.href;selected='';launching=false;body.dataset.world=agri?'agri':'hvacr';dialog.dataset.world=agri?'agri':'hvacr';
  dialog.querySelector('.world-logo').src=card.querySelector('img').src;dialog.querySelector('.world-logo').alt=agri?'AGRI Expo':'HVAC-R Egypt Expo';
  dialog.querySelector('.world-launch').disabled=true;dialog.querySelector('.world-selection').textContent='اختار نقطة البداية.';
  const routes=agri?[['الفكرة الكبيرة','نفهم الجمهور والرسالة معًا.','idea'],['من الفكرة للتنفيذ','نستكشف الريل والتصميمات.','execution-samples'],['الخطة خطوة بخطوة','نشوف مراحل الخطة.','plan']]:[['الفكرة الكبيرة','نكتشف الرؤية والجمهور.','vision'],['الأفكار','نشوف أفكار المحتوى.','ideas'],['السكريبتات','نقرأ النصوص الكاملة.','scripts']];
