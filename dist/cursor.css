@@ -1,0 +1,1 @@
+@media (hover:hover) and (pointer:fine){html,body,body *{cursor:url("assets/red-cursor.svg") 12 12, auto}a,button,summary,[role="button"],label,select{cursor:url("assets/red-pointer.svg") 14 14, pointer}input,textarea,[contenteditable="true"]{cursor:text}}
