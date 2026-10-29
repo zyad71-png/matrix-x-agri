@@ -1,1 +1,1 @@
-@media (hover:hover) and (pointer:fine){html,body,body *{cursor:url("assets/red-cursor.svg") 12 12, auto}a,button,summary,[role="button"],label,select{cursor:url("assets/red-pointer.svg") 14 14, pointer}input,textarea,[contenteditable="true"]{cursor:text}}
+@media (hover:hover) and (pointer:fine){html,body,body *{cursor:url("assets/pill-cursor.png") 0 0, auto}a,button,summary,[role="button"],label,select{cursor:url("assets/pill-cursor.png") 0 0, pointer}input,textarea,[contenteditable="true"]{cursor:text}}
