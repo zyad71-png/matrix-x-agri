@@ -3,7 +3,7 @@
  const close=()=>{menu?.setAttribute('aria-expanded','false');nav?.classList.remove('menu-open');};
  menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('menu-open',open);});
  nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));addEventListener('keydown',e=>{if(e.key==='Escape')close();});
- if(!document.querySelector('#scripts')&&/^#(ideas|scripts|performance|script-)/.test(location.hash))location.replace('execution.html'+location.hash);
+ if(!document.querySelector('#scripts')&&/^#(ideas|scripts|performance|script-)/.test(location.hash))location.replace('/hvacr/execution.html'+location.hash);
 
  const cards=[...document.querySelectorAll('.script-card')];
  const expand=document.querySelector('#expand-scripts');
