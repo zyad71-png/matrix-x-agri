@@ -2,7 +2,7 @@
 'use strict';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const chapters=$$('.chapter'),header=$('.site-header'),nav=$('#main-nav'),menu=$('.menu-toggle');
-const motion=matchMedia('(prefers-reduced-motion: reduce)');let less=motion.matches,queued=false,needsMeasure=true,bar=96;
+const motion=matchMedia('(prefers-reduced-motion: reduce)'),compact=matchMedia('(max-width: 1100px), (pointer: coarse)');let less=motion.matches||compact.matches,queued=false,needsMeasure=true,bar=96;
 const scenes=chapters.map(section=>({section,anchor:document.getElementById(section.dataset.chapter)}));
 function measure(){
  bar=header.getBoundingClientRect().height;
@@ -14,9 +14,9 @@ function sync(){
  if(needsMeasure)measure();
  const rects=chapters.map(s=>s.getBoundingClientRect());let current=0;
  scenes.forEach(({section,anchor},i)=>{
-  if(anchor.getBoundingClientRect().top<innerHeight*.4)current=i;
+  if((anchor||section).getBoundingClientRect().top<innerHeight*.4)current=i;
   const covered=!less&&i<chapters.length-1&&rects[i+1].top<=bar+1;
-  section.inert=covered;section.classList.toggle('is-covered',covered);
+  if(section.inert!==covered)section.inert=covered;if(section.classList.contains('is-covered')!==covered)section.classList.toggle('is-covered',covered);
  });
  const id=chapters[current].dataset.chapter;
  $$('#main-nav a').forEach(a=>{const selected=a.hash==='#'+id||(a.hash==='#review'&&id==='strengths')||(a.hash==='#during'&&id==='after')||(a.hash==='#execution'&&id==='channels');if(selected)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
@@ -26,7 +26,7 @@ function sync(){
 }
 function schedule(){if(!queued){queued=true;requestAnimationFrame(sync)}}
 function resized(){needsMeasure=true;schedule()}
-function preference(){less=motion.matches;document.documentElement.classList.toggle('less-motion',less);if(less){chapters.forEach(c=>{c.inert=false;c.classList.remove('is-covered')})}resized()}
+function preference(){less=motion.matches||compact.matches;document.documentElement.classList.toggle('less-motion',less);if(less){chapters.forEach(c=>{c.inert=false;c.classList.remove('is-covered')})}resized()}
 function closeMenu(){menu.setAttribute('aria-expanded','false');nav.classList.remove('is-open')}
 menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open)});
 addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
@@ -49,7 +49,7 @@ $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
 }));
 function restoreHash(){const target=document.getElementById(location.hash.slice(1));if(target)navigate(target,'instant')}
 addEventListener('popstate',restoreHash);addEventListener('hashchange',restoreHash);
-addEventListener('scroll',schedule,{passive:true});addEventListener('resize',resized);motion.addEventListener('change',preference);
+addEventListener('scroll',schedule,{passive:true});addEventListener('resize',resized);motion.addEventListener('change',preference);compact.addEventListener('change',preference);
 if('ResizeObserver' in window){const observer=new ResizeObserver(resized);chapters.forEach(c=>observer.observe(c));observer.observe(header)}
 $$('details').forEach(d=>d.addEventListener('toggle',resized));
 if(document.fonts)document.fonts.ready.then(resized);

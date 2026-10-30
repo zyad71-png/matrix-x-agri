@@ -2,7 +2,7 @@
 'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], number=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 const motionQuery=matchMedia('(prefers-reduced-motion: reduce)');
-let less=motionQuery.matches;
+const compact=matchMedia('(max-width:1100px), (pointer:coarse)');let less=motionQuery.matches||compact.matches;
 document.documentElement.classList.toggle('less-motion',less);
 if('IntersectionObserver' in window){document.documentElement.classList.add('motion-enabled');const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}),{threshold:.06});$$('.reveal').forEach(e=>o.observe(e))}
 const menu=$('#menu-toggle');menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));$('#main-nav').classList.toggle('is-open',open)});$$('#main-nav a').forEach(a=>a.addEventListener('click',()=>{menu.setAttribute('aria-expanded','false');$('#main-nav').classList.remove('is-open')}));addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');$('#main-nav').classList.remove('is-open')}});
@@ -45,7 +45,7 @@ function sync(){
   const r=rects[i];
   if(anchor.getBoundingClientRect().top<height*.4)current=i;
   const covered=!less&&i<scenes.length-1&&rects[i+1].top<=barHeight+1;
-  section.inert=covered;
+  if(section.inert!==covered)section.inert=covered;
   section.classList.toggle('is-covered',covered);
   if(less||covered||r.bottom<0||r.top>height)return;
   const offset=Math.max(-height,Math.min(height,height*.5-(r.top+r.height*.5)));
@@ -60,17 +60,18 @@ function sync(){
 function schedule(){if(!queued){queued=true;requestAnimationFrame(sync)}}
 function resized(){needsMeasure=true;schedule()}
 function preference(){
- less=motionQuery.matches;document.documentElement.classList.toggle('less-motion',less);
+ less=motionQuery.matches||compact.matches;document.documentElement.classList.toggle('less-motion',less);
  if(less){scenes.forEach(({section,layers})=>{section.inert=false;section.classList.remove('is-covered');layers.forEach(layer=>layer.style.setProperty('--depth-y','0px'))});pointerX=pointerY=0}
  resized();
 }
-motionQuery.addEventListener('change',preference);
+motionQuery.addEventListener('change',preference);compact.addEventListener('change',preference);
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',resized);
 if('ResizeObserver' in window){const resizeObserver=new ResizeObserver(resized);chapters.forEach(c=>resizeObserver.observe(c));resizeObserver.observe($('.header'))}
 if(document.fonts)document.fonts.ready.then(resized);
 addEventListener('load',resized,{once:true});
 // Anchor jumps use the flow marker rather than a section's pinned visual position.
 $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+ if(a.classList.contains('journey-choice')&&!motionQuery.matches)return;
  const anchor=document.getElementById(a.hash.slice(1));if(!anchor?.classList.contains('chapter-anchor'))return;
  e.preventDefault();
  const target=anchor.getBoundingClientRect().top+scrollY-barHeight;

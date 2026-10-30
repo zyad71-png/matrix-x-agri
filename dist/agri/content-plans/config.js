@@ -1,1 +1,1 @@
-window.CONTENT_PLANS_CONFIG={"SITE_URL":"https://matrix-agri-strategy-2027.matrixagency.chatgpt.site","FORM_ENDPOINT":""};
+window.CONTENT_PLANS_CONFIG={"SITE_URL":"https://expo-x-matrix.vercel.app","FORM_ENDPOINT":""};
