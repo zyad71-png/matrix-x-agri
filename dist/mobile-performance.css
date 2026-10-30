@@ -20,7 +20,6 @@
   .reveal,.motion-enabled .reveal,.motion-ready .reveal,.motion-ready .reveal.waiting{opacity:1!important;visibility:visible!important;transform:none!important;translate:none!important}
   .chapter,.section{overflow:visible}
   .parallax-scene{display:none!important}
-  main img:not(.end-logo){max-width:100%;height:auto!important;object-fit:contain}
   .portal-transition,.section-gateway{transition:none!important}
   .world-dialog::backdrop{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
  }
