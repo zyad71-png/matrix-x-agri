@@ -10,3 +10,5 @@
 .reel-page .scene-visual .zoom,.reel-page .frame-gallery .zoom{border-radius:22px}
 .reel-page .scene-visual .zoom img,.reel-page .frame-gallery .frame .zoom img{display:block;width:auto;max-width:100%;height:auto;margin-inline:auto;border-radius:22px}
 .reel-page .intro-preview img{animation:none}
+/* Supporting copy and spoken script use standard letterforms. */
+.reel-page main p,.reel-page main blockquote,.reel-page main li,.reel-page main figcaption,.reel-page .scene-timing,.reel-page .intro-copy>span,.reel-page main h4{font-feature-settings:'salt' 0,'swsh' 0,'calt' 0!important;font-variant-alternates:normal}
