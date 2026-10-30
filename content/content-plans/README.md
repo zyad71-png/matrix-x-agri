@@ -11,3 +11,5 @@ Old links with `#contact` are redirected within the page to `#plans`. Language s
 `settings.json` defines SITE_URL for canonical/alternate/OG URLs. Update it and rebuild if the domain changes. FORM_ENDPOINT remains empty and unused by the display-only pages.
 
 Comparison uses the complete table on tablet/desktop and paired plan values per metric below 701px. English output omits Arabic alternate names. At Aero supplied webfonts are loaded site-wide for Latin text; Arabic retains Thmanyah. Both pricing pages and the reel use presentation-motion.js for recurring, reduced-motion-aware scroll transitions.
+
+The automatic language suggestion banner is omitted; the header language switch remains. Motion groups never nest and use only transform/opacity with bounded concurrency and debounced exits.
