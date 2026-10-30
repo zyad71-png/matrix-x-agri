@@ -12,3 +12,5 @@
 
 /* Match the section gateway used inside each exhibition. */
 .portal-transition{z-index:9999;background:#0072bc;color:white;clip-path:circle(0% at var(--entry-x,50%) var(--entry-y,50%));transition:clip-path .35s ease,visibility .35s;overflow:hidden}.portal[data-world="agri"] .portal-transition{background:#285333}.portal.is-entering .portal-transition{clip-path:circle(150% at var(--entry-x,50%) var(--entry-y,50%))}.portal-transition img{display:none}.portal-transition span{font-size:clamp(26px,5vw,55px);font-weight:bold;color:white;text-align:center;padding:30px}.portal-transition:before,.portal-transition:after{content:'';position:absolute;width:35vw;height:35vw;border:1px solid #ffffff44;border-radius:35%;transform:rotate(30deg);left:5%;top:10%}.portal-transition:after{left:auto;right:5%;top:auto;bottom:5%;border-radius:50%}
+
+.portal .portal-transition[data-world="hvacr"]{background:#0072bc}.portal .portal-transition[data-world="agri"]{background:#285333}
