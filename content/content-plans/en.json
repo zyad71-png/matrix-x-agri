@@ -1,0 +1,350 @@
+{
+  "meta": {
+    "title": "Creative Content Plans | MATRIX",
+    "description": "From planning and copywriting to filming, design, and editing, MATRIX’s monthly content plans combine original production with repurposed archive footage, tailored to the brand’s goals and audience."
+  },
+  "ui": {
+    "skip": "Skip to content",
+    "nav.plans": "Plans",
+    "nav.compare": "Compare",
+    "nav.included": "What’s Included",
+    "nav.optional": "Optional Services",
+    "nav.faq": "FAQ",
+    "nav.cta": "Request a Plan",
+    "nav.menu": "Menu",
+    "lang.toggle": "العربية",
+    "lang.suggest": "هذه الصفحة متاحة أيضًا بالعربية.",
+    "lang.suggest_link": "عرض بالعربية",
+    "lang.suggest_close": "إغلاق",
+    "form.name": "Name",
+    "form.company": "Company",
+    "form.contact": "Email or phone",
+    "form.plan": "Plan",
+    "form.plan_essential": "Essential Plan",
+    "form.plan_expanded": "Expanded Plan",
+    "form.plan_unsure": "I need a recommendation",
+    "form.message": "Your message (optional)",
+    "form.submit": "Send request",
+    "form.error_required": "This field is required.",
+    "form.error_contact": "Enter a valid email or phone number.",
+    "form.success": "We’ve received your request and will be in touch.",
+    "form.unavailable": "Select a plan to discuss with the MATRIX team; submitting requests through this page is currently unavailable.",
+    "form.failure": "We couldn’t send your request. Please try again.",
+    "footer": "© MATRIX"
+  },
+  "hero": {
+    "eyebrow": "Creative Content Plans",
+    "title": "Planned monthly content, from first idea to final edit",
+    "intro": "From planning and copywriting to filming, design, and editing, MATRIX’s monthly content plans combine original production with repurposed archive footage, tailored to the brand’s goals and audience.",
+    "cta_primary": "Choose your plan ↓",
+    "cta_secondary": "Talk to our team"
+  },
+  "plans": {
+    "title": "Choose the Right Plan",
+    "items": [
+      {
+        "id": "essential",
+        "name": "Essential Content Plan",
+        "name_alt": "خطة المحتوى الأساسية",
+        "price": "EGP 30,000 per month",
+        "pieces": "18 content pieces per month",
+        "summary": "A balanced mix of designs, edited photos, motion graphics, and reels to support a consistent presence with varied, planned messaging.",
+        "groups": [
+          {
+            "title": "Posts — 10 pieces",
+            "items": [
+              {
+                "label": "3 motion graphics posts:",
+                "text": "Animated visual content for presenting key messages and information."
+              },
+              {
+                "label": "7 design and photo posts:",
+                "text": "Static designs, edited photos, or carousels, allocated according to the content plan."
+              }
+            ]
+          },
+          {
+            "title": "Reels — 8 videos",
+            "items": [
+              {
+                "label": "5 archive-based reels:",
+                "text": "Existing footage repurposed through editing and visual treatment to support the month’s concepts."
+              },
+              {
+                "label": "3 newly filmed reels:",
+                "text": "Original videos produced around the ideas and scripts developed in the content plan."
+              }
+            ]
+          }
+        ],
+        "fit": "Best for: Brands seeking a consistent presence with planned messaging and a steady rhythm.",
+        "cta": "Request the Essential Plan"
+      },
+      {
+        "id": "expanded",
+        "name": "Expanded Content Plan",
+        "name_alt": "خطة المحتوى الموسّعة",
+        "price": "EGP 45,000 per month",
+        "pieces": "29 content pieces per month",
+        "summary": "A higher production volume for broader messaging and a more active presence, with a larger allocation of newly filmed reels and motion graphics.",
+        "groups": [
+          {
+            "title": "Posts — 15 pieces",
+            "items": [
+              {
+                "label": "6 motion graphics posts:",
+                "text": "Animated visual content for presenting key messages and information."
+              },
+              {
+                "label": "9 design and photo posts:",
+                "text": "Static designs, edited photos, or carousels, allocated according to the content plan."
+              }
+            ]
+          },
+          {
+            "title": "Reels — 14 videos",
+            "items": [
+              {
+                "label": "8 archive-based reels:",
+                "text": "Existing footage repurposed through editing and visual treatment to support the month’s concepts."
+              },
+              {
+                "label": "6 newly filmed reels:",
+                "text": "Original videos produced around the ideas and scripts developed in the content plan."
+              }
+            ]
+          }
+        ],
+        "fit": "Best for: Brands seeking broader messaging and a more active presence through higher content production.",
+        "cta": "Request the Expanded Plan"
+      }
+    ]
+  },
+  "compare": {
+    "title": "Compare the Plans",
+    "columns": [
+      "",
+      "Essential",
+      "Expanded"
+    ],
+    "rows": [
+      {
+        "label": "Monthly price",
+        "level": 0,
+        "essential": "EGP 30,000",
+        "expanded": "EGP 45,000"
+      },
+      {
+        "label": "Total content pieces",
+        "level": 0,
+        "essential": "18",
+        "expanded": "29"
+      },
+      {
+        "label": "Posts",
+        "level": 0,
+        "essential": "10",
+        "expanded": "15"
+      },
+      {
+        "label": "↳ Motion graphics",
+        "level": 1,
+        "essential": "3",
+        "expanded": "6"
+      },
+      {
+        "label": "↳ Designs and photos",
+        "level": 1,
+        "essential": "7",
+        "expanded": "9"
+      },
+      {
+        "label": "Reels",
+        "level": 0,
+        "essential": "8",
+        "expanded": "14"
+      },
+      {
+        "label": "↳ Archive-based",
+        "level": 1,
+        "essential": "5",
+        "expanded": "8"
+      },
+      {
+        "label": "↳ Newly filmed",
+        "level": 1,
+        "essential": "3",
+        "expanded": "6"
+      },
+      {
+        "label": "Creative planning & copywriting",
+        "level": 0,
+        "essential": "Included",
+        "expanded": "Included"
+      },
+      {
+        "label": "Production: design, motion, filming, editing",
+        "level": 0,
+        "essential": "Included",
+        "expanded": "Included"
+      },
+      {
+        "label": "Monthly content calendar",
+        "level": 0,
+        "essential": "Included",
+        "expanded": "Included"
+      },
+      {
+        "label": "Optional services",
+        "level": 0,
+        "essential": "Available",
+        "expanded": "Available"
+      }
+    ]
+  },
+  "included": {
+    "title": "Included in Both Plans",
+    "items": [
+      {
+        "title": "Creative Planning & Copywriting",
+        "text": "Concept development, key messaging, initial visual direction, caption writing, on-visual text, and scripts for reels and motion graphics."
+      },
+      {
+        "title": "Content Production",
+        "text": "Graphic design, photo editing, motion graphics production, filming for new reels, and editing of both newly filmed and archive-based reels, according to the quantities specified in the selected plan."
+      }
+    ]
+  },
+  "planning": {
+    "title": "Monthly Content Planning",
+    "name_alt": "التخطيط الشهري للمحتوى",
+    "lead": "Every month starts with a clear plan, before any piece goes into production.",
+    "columns": [
+      "Component",
+      "Scope"
+    ],
+    "rows": [
+      {
+        "label": "Content Objectives",
+        "text": "Define the month’s objectives and align them with the brand’s marketing goals."
+      },
+      {
+        "label": "Content Pillars",
+        "text": "Establish the core themes and allocate content across them."
+      },
+      {
+        "label": "Ideas & Concepts",
+        "text": "Develop concepts tailored to the audience and brand identity."
+      },
+      {
+        "label": "Content Mix",
+        "text": "Allocate static posts, carousels, motion graphics, and reels within the specified quantities."
+      },
+      {
+        "label": "Key Messages & Content Angles",
+        "text": "Define the main message and approach for each concept."
+      },
+      {
+        "label": "Creative & Visual Direction",
+        "text": "Establish the initial creative treatment and visual approach."
+      },
+      {
+        "label": "Content Calendar",
+        "text": "Organize proposed publishing dates and platforms in a monthly calendar."
+      },
+      {
+        "label": "CTA Planning",
+        "text": "Define the desired audience action for each content piece."
+      }
+    ]
+  },
+  "counting": {
+    "title": "How We Count Content",
+    "items": [
+      {
+        "label": "Motion graphics",
+        "text": "count toward the total post allocation."
+      },
+      {
+        "label": "Carousels",
+        "text": "are included within the design and photo post allocation."
+      },
+      {
+        "label": "Newly filmed reel quantities",
+        "text": "refer to completed videos, not filming sessions."
+      },
+      {
+        "label": "Content calendar preparation",
+        "text": "is included; platform scheduling and publishing are optional."
+      }
+    ]
+  },
+  "optional": {
+    "title": "Optional Services",
+    "lead": "Available according to the project’s needs and agreed scope of work:",
+    "items": [
+      {
+        "label": "Social Media Page Management",
+        "text": ""
+      },
+      {
+        "label": "Community Management:",
+        "text": "Monitoring and responding to messages and comments."
+      },
+      {
+        "label": "Media Buying & Advertising Campaign Management",
+        "text": ""
+      },
+      {
+        "label": "Content Scheduling & Publishing",
+        "text": ""
+      }
+    ]
+  },
+  "process": {
+    "title": "How We Work",
+    "steps": [
+      "We define the month’s objectives and pillars.",
+      "We develop ideas, messaging, and visual direction, and prepare the content calendar.",
+      "We write captions, on-visual text, and scripts for reels and motion graphics.",
+      "We produce: design, motion graphics, filming, and editing.",
+      "We deliver the content according to the quantities specified in the selected plan."
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "What is the difference between the two plans?",
+        "a": "Production volume: 18 pieces in Essential and 29 in Expanded, with more newly filmed reels and motion graphics."
+      },
+      {
+        "q": "What are “archive-based reels”?",
+        "a": "Existing footage repurposed through editing and visual treatment to support the month’s concepts."
+      },
+      {
+        "q": "Does a filming session count as a content piece?",
+        "a": "No. Newly filmed reel quantities refer to completed videos, not filming sessions."
+      },
+      {
+        "q": "Are carousels and motion graphics counted on top of the posts?",
+        "a": "No. Motion graphics count toward the post allocation, and carousels sit within the design and photo allocation."
+      },
+      {
+        "q": "Are scheduling and publishing included?",
+        "a": "Content calendar preparation is included. Scheduling and publishing are optional services."
+      },
+      {
+        "q": "Can we add page management or ad campaigns?",
+        "a": "Yes, as optional services according to the project’s needs and agreed scope of work."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Start Your Monthly Plan",
+    "lead": "Tell us about your brand’s goals and audience, and we’ll recommend the right plan.",
+    "cta_essential": "Request the Essential Plan",
+    "cta_expanded": "Request the Expanded Plan",
+    "cta_talk": "Talk to our team"
+  }
+}
