@@ -7,3 +7,5 @@
 @media(max-width:700px){#compare .table-scroll{display:none}.compare-mobile{display:block}.compare-row dd{font-size:16px}.compare-row{padding:20px}}
 
 :root body .submark{font-family:system-ui,sans-serif}
+
+.return-to-agri{padding-block:20px 55px;text-align:center}.return-to-agri-link{display:inline-flex;align-items:center;gap:24px}.return-to-agri-link span{font-family:system-ui,sans-serif}
