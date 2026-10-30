@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  const top = () => { if (!location.hash) window.scrollTo({top:0,left:0,behavior:'instant'}); };
+  const top = () => { if (!location.hash) window.scrollTo({top:0,left:0,behavior:'auto'}); };
   top(); addEventListener('pageshow',top); addEventListener('load',top,{once:true});
   addEventListener('popstate',top);
   // SVG paths avoid platform-dependent emoji arrows.

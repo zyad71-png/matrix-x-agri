@@ -78,7 +78,7 @@ $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
  const targetIndex=scenes.findIndex(scene=>scene.anchor===anchor);
  // A formerly covered section must be focusable as soon as navigation begins.
  if(targetIndex>=0){chapters[targetIndex].inert=false;chapters[targetIndex].classList.remove('is-covered')}
- window.scrollTo({top:Math.max(0,target),behavior:less?'instant':'smooth'});
+ window.scrollTo({top:Math.max(0,target),behavior:less?'auto':'smooth'});
  history.pushState(null,'',a.hash);
 }));
 if(stage){stage.addEventListener('pointermove',e=>{if(less||e.pointerType!=='mouse')return;const r=stage.getBoundingClientRect();pointerX=((e.clientX-r.left)/r.width-.5)*12;pointerY=((e.clientY-r.top)/r.height-.5)*10;schedule()},{passive:true});stage.addEventListener('pointerleave',()=>{pointerX=pointerY=0;schedule()})}
@@ -89,7 +89,7 @@ function restoreSamples(){
  const target=document.getElementById('execution-samples'),section=target?.closest('.chapter');if(!section)return;
  const marker=document.getElementById(section.dataset.chapter);
  section.inert=false;section.classList.remove('is-covered');
- requestAnimationFrame(()=>{const relative=target.getBoundingClientRect().top-section.getBoundingClientRect().top;window.scrollTo({top:Math.max(0,marker.getBoundingClientRect().top+scrollY+relative-barHeight-20),behavior:'instant'});schedule()});
+ requestAnimationFrame(()=>{const relative=target.getBoundingClientRect().top-section.getBoundingClientRect().top;window.scrollTo({top:Math.max(0,marker.getBoundingClientRect().top+scrollY+relative-barHeight-20),behavior:'auto'});schedule()});
 }
 addEventListener('load',restoreSamples);addEventListener('hashchange',restoreSamples);if(document.fonts)document.fonts.ready.then(restoreSamples);
 sync();

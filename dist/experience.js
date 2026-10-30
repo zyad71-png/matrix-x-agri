@@ -45,9 +45,9 @@ $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
  const target=document.getElementById(a.hash.slice(1));if(!target)return;
  // Keep the standard skip-link focus behaviour.
  if(a.classList.contains('skip'))return;
- e.preventDefault();closeMenu();history.pushState(null,'',a.hash);navigate(target,less?'instant':'smooth');
+ e.preventDefault();closeMenu();history.pushState(null,'',a.hash);navigate(target,less?'auto':'smooth');
 }));
-function restoreHash(){const target=document.getElementById(location.hash.slice(1));if(target)navigate(target,'instant')}
+function restoreHash(){const target=document.getElementById(location.hash.slice(1));if(target)navigate(target,'auto')}
 addEventListener('popstate',restoreHash);addEventListener('hashchange',restoreHash);
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',resized);motion.addEventListener('change',preference);compact.addEventListener('change',preference);
 if('ResizeObserver' in window){const observer=new ResizeObserver(resized);chapters.forEach(c=>observer.observe(c));observer.observe(header)}
