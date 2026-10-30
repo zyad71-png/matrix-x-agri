@@ -74,3 +74,5 @@ html:not(.stack-enabled) .chapter,.less-motion .chapter{position:relative;top:au
 @media(max-width:800px){.header nav{top:78px}.header .hub-return{font-size:10px;padding:6px 10px}.header .hub-return span{margin-inline-start:3px}}
 @media(max-width:420px){.header .hub-return{font-size:9px;padding:6px 8px}.header .menu-toggle{font-size:10px}.header{gap:9px}}
 @media print{.header .hub-return{display:none}}
+/* The document scroll padding already accounts for the fixed header. */
+.chapter-anchor{scroll-margin-top:0}

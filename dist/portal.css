@@ -14,3 +14,12 @@
 .portal-transition{z-index:9999;background:#0072bc;color:white;clip-path:circle(0% at var(--entry-x,50%) var(--entry-y,50%));transition:clip-path .35s ease,visibility .35s;overflow:hidden}.portal[data-world="agri"] .portal-transition{background:#285333}.portal.is-entering .portal-transition{clip-path:circle(150% at var(--entry-x,50%) var(--entry-y,50%))}.portal-transition img{display:none}.portal-transition span{font-size:clamp(26px,5vw,55px);font-weight:bold;color:white;text-align:center;padding:30px}.portal-transition:before,.portal-transition:after{content:'';position:absolute;width:35vw;height:35vw;border:1px solid #ffffff44;border-radius:35%;transform:rotate(30deg);left:5%;top:10%}.portal-transition:after{left:auto;right:5%;top:auto;bottom:5%;border-radius:50%}
 
 .portal .portal-transition[data-world="hvacr"]{background:#0072bc}.portal .portal-transition[data-world="agri"]{background:#285333}
+/* Soft alternating exhibition colors on mobile and tablet. */
+@media(max-width:1100px) and (prefers-reduced-motion:no-preference){
+ .portal{isolation:isolate;background:#fafbf8!important}
+ .portal::before,.portal::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none}
+ .portal::before{background:radial-gradient(ellipse at 20% 36%,#dcebd2 0%,transparent 72%);animation:portal-green-fade 14s ease-in-out infinite}
+ .portal::after{background:radial-gradient(ellipse at 80% 36%,#d7effb 0%,transparent 72%);animation:portal-blue-fade 14s ease-in-out infinite}
+ @keyframes portal-green-fade{0%,100%{opacity:.9}25%,75%{opacity:.12}50%{opacity:0}}
+ @keyframes portal-blue-fade{0%,100%{opacity:0}25%,75%{opacity:.12}50%{opacity:.9}}
+}

@@ -1,9 +1,22 @@
 (() => {
   'use strict';
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  const top = () => { if (!location.hash) window.scrollTo({top:0,left:0,behavior:'auto'}); };
-  top(); addEventListener('pageshow',top); addEventListener('load',top,{once:true});
-  addEventListener('popstate',top);
+  const align = () => {
+    let id=location.hash.slice(1);try{id=decodeURIComponent(id)}catch(_){};
+    const target=id&&document.getElementById(id);
+    if(target){
+      if(target.tagName==='DETAILS')target.open=true;
+      target.scrollIntoView({block:'start',behavior:'auto'});
+    } else if(!id){
+      const root=document.documentElement,old=root.style.scrollBehavior;
+      root.style.setProperty('scroll-behavior','auto','important');
+      window.scrollTo(0,0);
+      requestAnimationFrame(()=>{if(old)root.style.scrollBehavior=old;else root.style.removeProperty('scroll-behavior');});
+    }
+  };
+  if(!location.hash)align();
+  addEventListener('pageshow',align);addEventListener('load',()=>requestAnimationFrame(align),{once:true});
+  addEventListener('popstate',align);
   // SVG paths avoid platform-dependent emoji arrows.
   const rotations={'↗':0,'↙':180,'↘':90,'↖':270,'↑':315,'↓':135,'←':225,'→':45};
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
