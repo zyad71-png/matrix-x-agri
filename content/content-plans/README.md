@@ -9,3 +9,5 @@ The display-only redesign intentionally omits the contact section, team-contact 
 Old links with `#contact` are redirected within the page to `#plans`. Language switching preserves the current valid section and existing query parameters.
 
 `settings.json` defines SITE_URL for canonical/alternate/OG URLs. Update it and rebuild if the domain changes. FORM_ENDPOINT remains empty and unused by the display-only pages.
+
+Comparison uses the complete table on tablet/desktop and paired plan values per metric below 701px. English output omits Arabic alternate names. At Aero supplied webfonts are loaded site-wide for Latin text; Arabic retains Thmanyah. Both pricing pages and the reel use presentation-motion.js for recurring, reduced-motion-aware scroll transitions.
