@@ -1,1 +1,8 @@
-@media (hover:hover) and (pointer:fine){html,body,body *{cursor:url("assets/pill-cursor.png") 0 0, auto}a,button,summary,[role="button"],label,select{cursor:url("assets/pill-cursor.png") 0 0, pointer}input,textarea,[contenteditable="true"]{cursor:text}}
+@media (hover:hover) and (pointer:fine){
+ html{--expo-cursor:url("assets/pill-cursor.png") 0 0}
+ html[data-exhibition="agri"]{--expo-cursor:url("assets/agri-cursor.png") 24 24}
+ html[data-exhibition="hvacr"]{--expo-cursor:url("assets/hvacr-cursor.png") 24 24}
+ html,body,body *{cursor:var(--expo-cursor),auto}
+ a,button,summary,[role="button"],label,select{cursor:var(--expo-cursor),pointer}
+ input,textarea,[contenteditable="true"]{cursor:text}
+}

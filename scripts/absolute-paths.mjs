@@ -2,6 +2,8 @@ import fs from 'node:fs';import path from 'node:path';
 export function absolutePaths(html,file){
  const folder=path.relative('dist',path.dirname(file)).replaceAll('\\','/');
  const base='https://site.invalid/'+(folder?folder+'/':'');
+ const expo=path.relative('dist',file).split(path.sep)[0];
+ if(['agri','hvacr'].includes(expo)&&!html.includes('data-exhibition='))html=html.replace('<html ',`<html data-exhibition="${expo}" `);
  return html.replace(/\b(href|src|poster|action)=("|')([^"']*)\2/g,(all,attr,quote,value)=>{
   if(!value||/^(?:#|\/|[a-z][a-z\d+.-]*:)/i.test(value))return all;
   const u=new URL(value,base);return `${attr}=${quote}${u.pathname}${u.search}${u.hash}${quote}`;
