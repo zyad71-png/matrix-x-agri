@@ -73,3 +73,6 @@ runpy.run_path("scripts/agri-plan-switch.py")
 
 import runpy
 runpy.run_path("scripts/agri-plan-breakdown.py")
+
+import runpy
+runpy.run_path("scripts/agri-move-intro.py")
