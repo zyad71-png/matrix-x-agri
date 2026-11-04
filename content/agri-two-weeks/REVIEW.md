@@ -36,3 +36,7 @@ Created three embedded-font vector reel covers using the existing AGRI logo and 
 ## Client presentation refinement — November 4
 Removed the three hero choices. Added an editorial audience/offer introduction and week narratives; retained all nine sample pieces and exact financial quantities. Workflow now uses connected rows. Deliverables and optional services use mouse drag, native touch scrolling and wheel scrolling. Post galleries now use real scroll-snap slides, with visible idea, audience, objective and message plus expandable source copy/captions. Comparison is expandable.
 Chromium at 390, 768 and 1440 px: nine posts, no horizontal overflow, wheel advances gallery and service rails, no JS errors. All nine dialogs/captions checked; mouse drag advanced the six-slide carousel and image zoom passed. Actual iOS Safari unavailable. HVAC and Vercel untouched. Publication does not constitute client approval of content.
+
+
+## Art-directed galleries and client viewer
+Post/reel viewer now uses overview, script/copy and bilingual caption tabs. Galleries retain native RTL scroll, mouse drag and wheel with clickable slide indicators; storyboard references also scroll as a RTL rail. Planning and optional service cards use distinct geometric artwork and a clickable chapter timeline. Tested Chromium 390/768/1440: slide indicators, rail timeline, caption/script panels, no page overflow or runtime errors. Actual iOS Safari not available.
