@@ -28,3 +28,6 @@ nav.clear()
 for target,label in [('start','الخطة'),('samples','النماذج'),('workflow','كيف نعمل؟'),('pricing','الأسعار')]:nav.append(H.fragment_fromstring('<a href="#'+target+'">'+label+'</a>'))
 d.cssselect('head')[0].append(H.fragment_fromstring('<link rel="stylesheet" href="/agri/client.css">'))
 p.write_text('<!doctype html>'+H.tostring(d,encoding='unicode',method='html'))
+
+import runpy
+runpy.run_path("scripts/restore-pricing-view.py")
