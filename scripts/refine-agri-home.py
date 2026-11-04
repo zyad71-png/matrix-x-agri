@@ -66,3 +66,6 @@ for a in s.xpath('//a[@href]'):
 head=s.xpath('//head')[0];head.append(H.fragment_fromstring('<link rel="stylesheet" href="/agri/strategy-page.css">'))
 s.xpath('//header')[0].append(H.fragment_fromstring('<a class="strategy-back" href="/agri/">العودة للرئيسية ↗</a>'))
 Path('dist/agri/strategy.html').write_text('<!doctype html>'+H.tostring(s,encoding='unicode',method='html'))
+
+import runpy
+runpy.run_path('scripts/polish-agri-home.py')
