@@ -10,3 +10,5 @@ main{max-width:1200px;padding-inline:48px}section{padding:76px 0}.hero{min-heigh
 @media(prefers-reduced-motion:reduce){.slide-stage{scroll-behavior:auto}.card-rail>article,.gallery-dots button{transition:none}}
 
 .frames{display:flex;direction:rtl;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;cursor:grab}.frames figure{flex:0 0 86%;scroll-snap-align:start}.frames img{display:block;width:100%;height:auto}.frames.dragging{scroll-snap-type:none}.rail-tools [data-rail-status]{direction:ltr}.gallery-help{direction:rtl}@media(max-width:600px){#post-dialog{max-width:100vw}}
+
+.rail-tools button[data-rail-next]:after{content:'←'}.rail-tools button[data-rail-prev]:after{content:'→'}

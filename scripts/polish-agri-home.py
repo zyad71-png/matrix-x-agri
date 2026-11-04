@@ -34,7 +34,7 @@ for card in old.xpath('//article[contains(concat(" ",@class," ")," plan-card ")]
 # Native snapping rails, controlled in the same rightward direction as the post viewer.
 for id,cls in [('deliverables','deliverables-grid'),('optional','optional-grid')]:
  sec=d.get_element_by_id(id);track=sec.xpath('./div[@class="'+cls+'"]')[0];track.set('class','card-rail');track.set('id',id+'-rail');track.set('tabindex','0');track.set('aria-label','بطاقات '+sec.xpath('.//h2')[0].text_content())
- sec.insert(list(sec).index(track),H.fragment_fromstring('<div class="rail-tools"><button type="button" data-rail-next="'+id+'-rail" aria-label="البطاقة التالية">التالي →</button><span aria-live="polite" data-rail-status="'+id+'-rail">1 / '+str(len(track))+'</span><button type="button" data-rail-prev="'+id+'-rail" aria-label="البطاقة السابقة">← السابق</button></div>'))
+ sec.insert(list(sec).index(track),H.fragment_fromstring('<div class="rail-tools"><button type="button" data-rail-next="'+id+'-rail" aria-label="التحرك يسارًا">التالي →</button><span aria-live="polite" data-rail-status="'+id+'-rail">1 / '+str(len(track))+'</span><button type="button" data-rail-prev="'+id+'-rail" aria-label="التحرك يمينًا">← السابق</button></div>'))
 result=H.tostring(d,encoding='unicode',method='html');result=result.replace('تصميمات ثابتة','تصميمات').replace('تصميم ثابت','تصميم').replace('احتياجات','أولويات').replace('احتياج','متطلب').replace('منطوق','نص المتحدث').replace('تحتاج','تتطلب').replace('يحتاج','يتطلب');p.write_text('<!doctype html>'+result)
 # Hide pricing/exhibition chooser in the full strategy while retaining the page's sections.
 sfile=root/'strategy.html';s=H.fromstring(sfile.read_text())
