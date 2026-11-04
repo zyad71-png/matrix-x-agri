@@ -23,3 +23,16 @@ main{max-width:1200px;padding-inline:48px}section{padding:76px 0}.hero{min-heigh
 @media(max-width:1000px){#deliverables-rail:after{flex-basis:calc(100% - (100% - 16px)/2 - 16px)}}
 @media(max-width:600px){#deliverables-rail:after{flex-basis:calc(13% - 16px)}}
 @media(prefers-reduced-motion:reduce){#deliverables-rail>article{transition:none}}
+/* Optional services as a responsive bento composition. */
+.optional-bento{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:repeat(2,minmax(195px,auto));gap:14px}
+.optional-bento article{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;border:1px solid #526750;border-radius:24px;padding:28px;background:#203629;color:#f3f5e9}
+.optional-bento article:first-child{grid-row:span 2;background:#d9e8c6;color:#193723;justify-content:space-between}
+.optional-bento article:nth-child(2){grid-column:span 2;background:#2d4831}
+.optional-bento article:nth-child(4){background:#e8eedf;color:#193723}
+.optional-bento article:after{content:'';position:absolute;width:135px;height:135px;border:1px solid currentColor;opacity:.12;left:-32px;top:-34px;border-radius:65% 0 65% 0;transform:rotate(30deg);pointer-events:none}
+.optional-bento h3{font-size:clamp(19px,2vw,26px);line-height:1.5;margin:20px 0 10px;max-width:27ch}
+.optional-bento p{font-size:15px;opacity:.78;max-width:42ch}
+.optional-bento .service-number{font-size:12px;opacity:.7;letter-spacing:2px}
+.optional-bento .available{margin-top:auto;padding:5px 14px;border:1px solid currentColor;opacity:.7}
+@media(max-width:700px){.optional-bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}.optional-bento article:first-child{grid-row:auto;grid-column:span 2;min-height:200px}.optional-bento article:nth-child(2){grid-column:span 2}.optional-bento article{padding:22px;min-height:195px}.optional-bento h3{font-size:19px;overflow-wrap:anywhere}}
+@media(max-width:360px){.optional-bento{grid-template-columns:1fr}.optional-bento article:first-child,.optional-bento article:nth-child(2){grid-column:auto}}

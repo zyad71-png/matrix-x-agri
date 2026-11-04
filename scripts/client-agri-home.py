@@ -31,3 +31,6 @@ p.write_text('<!doctype html>'+H.tostring(d,encoding='unicode',method='html'))
 
 import runpy
 runpy.run_path("scripts/restore-pricing-view.py")
+
+import runpy
+runpy.run_path("scripts/optional-bento.py")
