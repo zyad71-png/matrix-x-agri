@@ -61,3 +61,6 @@ runpy.run_path("scripts/agri-workflow-copy.py")
 
 import runpy
 runpy.run_path("scripts/agri-included-services.py")
+
+import runpy
+runpy.run_path("scripts/agri-archive-reels.py")
