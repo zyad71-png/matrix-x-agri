@@ -43,3 +43,5 @@ for a in s.xpath('//a[@href]'):
 sfile.write_text('<!doctype html>'+H.tostring(s,encoding='unicode',method='html'))
 # Site landing is AGRI; HVAC remains available at its existing URL.
 Path('dist/index.html').write_text('<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>أجري إكسبو — خطة المحتوى</title><meta http-equiv="refresh" content="0;url=/agri/#home"><script>location.replace("/agri/#home")</script></head><body><a href="/agri/#home">خطة أجري إكسبو</a></body></html>')
+import runpy
+runpy.run_path('scripts/client-agri-home.py')
