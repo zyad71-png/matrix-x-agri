@@ -43,3 +43,6 @@ runpy.run_path("scripts/agri-hero-cleanup.py")
 
 import runpy
 runpy.run_path("scripts/agri-copy-cleanup.py")
+
+import runpy
+runpy.run_path("scripts/agri-final-clean.py")
