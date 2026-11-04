@@ -55,3 +55,6 @@ runpy.run_path("scripts/agri-reel-cleanup.py")
 
 import runpy
 runpy.run_path("scripts/agri-invest-copy.py")
+
+import runpy
+runpy.run_path("scripts/agri-workflow-copy.py")
