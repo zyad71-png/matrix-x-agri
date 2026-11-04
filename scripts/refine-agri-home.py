@@ -22,6 +22,18 @@ for n,title,desc in [(1,'الأسبوع الأول','قيمة المعرض وت�
   elif badge.text=='▶':badge.text='';badge.set('class','post-mark reel-mark')
   else:badge.text='';badge.set('class','post-mark carousel-mark')
   for play in card.xpath('.//div[@class="reel-tile"]/span'):play.text='';play.set('class','play-glyph')
+# Nine-tile presentation: six designs including the carousel, plus three reels.
+samples=d.get_element_by_id('samples');heading=samples.xpath('./div[contains(@class,"section-title")]')[0];heading.xpath('./h2')[0].text='خطة أول أسبوعين';heading.xpath('./h2')[0].clear();heading.xpath('./h2')[0].text='خطة أول أسبوعين';heading.xpath('./p')[0].text='٦ تصميمات تشمل كاروسيل واحد · ٣ ريلز بتصوير جديد'
+allcards={el.get('data-piece'):el for el in samples.xpath('.//button[@data-piece]')};extra=allcards['extra'];extra.set('aria-label','استثمر زيارتك — نموذج إضافي خارج القطع الثماني')
+for el in extra.xpath('./div[@class="post-copy"]|.//span[@class="post-mark"]'):el.getparent().remove(el)
+for el in samples.xpath('./div[@class="week-tabs"]|./div[@id="week1"]|./div[@id="week2"]|./details'):el.getparent().remove(el)
+grid=H.fragment_fromstring('<div class="post-grid exhibition-grid" aria-label="نماذج خطة أول أسبوعين"></div>')
+for key in ['piece-4','piece-3','piece-1','piece-7','piece-6','piece-2','extra','piece-8','piece-5']:
+ card=allcards[key]
+ for tile in card.xpath('.//div[@class="reel-tile"]'):
+  tile.clear();tile.set('class','reel-tile');tile.append(H.fragment_fromstring('<img src="/assets/agri-logo.png" alt="">'));tile.append(H.fragment_fromstring('<small>مرجع بصري · تصوير جديد</small>'))
+ grid.append(card)
+samples.append(grid);samples.append(H.fragment_fromstring('<p class="grid-note">«استثمر زيارتك» نموذج إضافي أو بديل خارج القطع الثماني الأساسية.</p>'))
 # Production workflow pulled from the approved document.
 source=Path('content/agri-two-weeks/source.md').read_text();block=source.split('## كيف نجهّز الخطة للنشر؟')[1].split('الريلز الثلاثة')[0];rows=[line for line in block.splitlines() if line.startswith('|')][2:]
 steps=''.join('<article><span>'+str(i+1).zfill(2)+'</span><h3>'+e(c[0])+'</h3><p>'+e(c[1])+'</p><small>'+e(c[2])+'</small></article>' for i,line in enumerate(rows) for c in [[x.strip() for x in line.strip('|').split('|')]])
