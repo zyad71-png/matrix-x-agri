@@ -6,7 +6,7 @@ for id,posts,motion,design,reels,archive,new,session in [('plan-essential',10,3,
  for el in card.xpath('./h3|./p[contains(@class,"alternate")]|./details'):card.remove(el)
  summary=card.xpath('./p[contains(@class,"plan-summary")]')[0]
  if id=='plan-expanded':summary.text='تشمل جميع الخدمات المشمولة، مع حجم إنتاج أكبر.'
- data=[('الاستراتيجية وخطة المحتوى الشهرية',None),('صناعة المحتوى',None),(f'{posts} بوستات — شهريًا',[f'{motion} بوستات موشن جرافيك',f'{design} بوستات تصميم (تصميمات، صور، كاروسيل)']),('جلسة تصوير واحدة — شهريًا' if session else 'جلسات التصوير — العدد وفق الاتفاق',None),(f'{reels} ريلز — شهريًا',[f'{archive} ريلز من أرشيف المعرض — اختيار وإخراج مواد الأرشيف لدى فريق المعرض وفق الاتفاق.',f'{new} ريلز بتصوير جديد','أغلفة الريلز']),('إنتاج وتنفيذ المحتوى',None),('جدول نشر منظم',None),('مراجعة وتسليم',None)]
+ data=[('الاستراتيجية وخطة المحتوى الشهرية',None),('صناعة المحتوى',None),(f'{posts} بوستات — شهريًا',[f'{motion} بوستات موشن جرافيك',f'{design} بوستات تصميم (تصميمات، صور، كاروسيل)']),('جلسة تصوير واحدة — شهريًا' if session else 'جلسة تصوير واحدة — شهريًا',None),(f'{reels} ريلز — شهريًا',[f'{archive} ريلز من أرشيف المعرض — اختيار وإخراج مواد الأرشيف لدى فريق المعرض وفق الاتفاق.',f'{new} ريلز بتصوير جديد','أغلفة الريلز']),('إنتاج وتنفيذ المحتوى',None),('جدول نشر منظم',None),('مراجعة وتسليم',None)]
  box=H.Element('div',{'class':'plan-breakdown'})
  for title,children in data:
   if children:
