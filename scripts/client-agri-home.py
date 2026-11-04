@@ -79,3 +79,6 @@ runpy.run_path("scripts/agri-move-intro.py")
 
 import runpy
 runpy.run_path("scripts/agri-menu.py")
+
+import runpy
+runpy.run_path("scripts/agri-swap-grid.py")
