@@ -34,3 +34,6 @@ runpy.run_path("scripts/restore-pricing-view.py")
 
 import runpy
 runpy.run_path("scripts/optional-bento.py")
+
+import runpy
+runpy.run_path("scripts/agri-egyptian-copy.py")
