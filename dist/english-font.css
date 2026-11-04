@@ -4,3 +4,5 @@
 /* Scroll containers stay scrollable without platform scrollbar arrows. */
 *{scrollbar-width:none}
 *::-webkit-scrollbar{display:none;width:0;height:0}
+
+::selection{background:#82a964;color:#0e2415}::-moz-selection{background:#82a964;color:#0e2415}

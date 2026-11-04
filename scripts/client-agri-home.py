@@ -49,3 +49,6 @@ runpy.run_path("scripts/agri-final-clean.py")
 
 import runpy
 runpy.run_path("scripts/agri-latest-copy.py")
+
+import runpy
+runpy.run_path("scripts/agri-reel-cleanup.py")
