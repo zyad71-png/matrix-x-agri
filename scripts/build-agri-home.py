@@ -90,3 +90,6 @@ h='''<!doctype html><html lang="ar" dir="rtl" data-exhibition="agri"><head><meta
 # Required vocabulary guard, including preserved legacy reference copy.
 h=h.replace('الاحتياجات','الأولويات').replace('احتياجات','أولويات').replace('احتياج','متطلب').replace('تحتاج','تتطلب').replace('يحتاج','يتطلب').replace('المحتاجة','المطلوبة').replace('المنطوق','نص المتحدث').replace('منطوق','نص المتحدث')
 (root/'index.html').write_text(h)
+
+import runpy
+runpy.run_path("scripts/refine-agri-home.py")
