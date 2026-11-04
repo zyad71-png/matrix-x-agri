@@ -67,3 +67,6 @@ runpy.run_path("scripts/agri-archive-reels.py")
 
 import runpy
 runpy.run_path("scripts/agri-reel01-copy.py")
+
+import runpy
+runpy.run_path("scripts/agri-plan-switch.py")
